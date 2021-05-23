@@ -129,7 +129,22 @@ print('Average temperature (F) for the Summer of 69:', round(avg_temp_1969, 2))
 monthly_data = None
 
 # YOUR CODE HERE 9
-
+"""Define a function to convert from Fahrenheit to Celsius."""
+def fahr_to_celsius(temp_fahrenheit):
+  converted_temp = (temp_fahrenheit - 32) / 1.8
+  return converted_temp
+"""Apply the fahr_to_celsius function to the data column TAVG."""
+data['TAVG_C'] = data['TAVG'].apply(fahr_to_celsius)
+"""Convert data column DATE to String type."""
+data['DATE_STR'] = data['DATE'].astype(str)
+"""Limit the data column DATE to year and month."""
+data['YEAR_MONTH'] = data['DATE_STR'].str.slice(start=0, stop=6)
+"""Group data by limited YEAR_MONTH."""
+grouped = data.groupby(['YEAR_MONTH'])
+"""Add column temp_celsius to monthly_data."""
+monthly_data = pd.DataFrame(columns=['temp_celsius'])
+"""Enter the grouped average temperatures in degrees Celsius in the monthly_data column temp_celsius."""
+monthly_data['temp_celsius'] = grouped['TAVG_C'].mean()
 
 #CAUTION!!! DON'T EDIT THIS PART START
 # This test print should print the length of variable monthly_data
