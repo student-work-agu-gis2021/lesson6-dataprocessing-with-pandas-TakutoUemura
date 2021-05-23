@@ -114,7 +114,7 @@ print('Average temperature (F) for the whole dataset:', round(avg_temp, 2))
 avg_temp_1969 = None
 
 # YOUR CODE HERE 8
-
+avg_temp_1969 = data.query('19690501 <= DATE <= 19690831')['TMAX'].mean()
 
 
 #CAUTION!!! DON'T EDIT THIS PART START
